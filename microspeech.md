@@ -1,0 +1,15 @@
+2. Explain how microspeech works
+
+MicroSpeech is a small program that listens to your voice and tries to recognize simple words like “yes,” “no,” or “stop.” It can run on small, low-power devices like microcontrollers which are still much less powerful than a phone or computer. It works by turning the sound it hears through a microphone into numbers and then using a neural network to guess which word was said. When the guess is strong enough it will register that particular word as having been said.
+
+A major advantage of MicroSpeech, as the name suggests, is that it is an example of a speech recognition system that has been shrunk down to fit on chips. These chips might have only a few tens of kilobytes of memory, but MicroSpeech is designed to work within those limits.
+
+The way MicroSpeech works is that it listens to sound through a microphone and captures a short slice of audio—typically one second at a time. This raw audio data is processed into something more meaningful using a method called MFCC (Mel-frequency cepstral coefficients), which helps the model understand the patterns in speech.
+
+After converting the audio into a set of features, MicroSpeech passes these features into a pre-trained neural network that has learned to recognize certain words. This model produces a set of scores that represent how likely it is that each known word was spoken. MicroSpeech doesn't respond immediately to every score, though—it waits to see if the score stays high for a short period of time, helping it ignore background noise or unclear speech. Once it’s confident, it triggers an action or signal that says, “This word was recognized".
+
+To make this possible, every part of MicroSpeech is optimized. The audio processing step—MFCC—is fast and compact, reducing the amount of data the neural network needs to handle. The model itself is tiny, with only a few layers and very few parameters, but it’s still accurate enough to recognize a small number of words reliably. The system is also designed to be efficient in how it processes data; for example, it uses fixed-point math instead of floating-point, because many microcontrollers don’t have floating-point units and would otherwise be too slow or power-hungry.
+
+What’s especially important about MicroSpeech is that it’s always running. It constantly listens to a rolling window of audio and checks if any known word appears. This real-time capability is critical for applications like voice-controlled appliances or toys, where you want the system to respond instantly when a word like “start” or “stop” is spoken. But at the same time, it needs to ignore random sounds, background noise, or unclear speech, which it does through careful tuning of thresholds and timing.
+
+MicroSpeech is not meant to understand full conversations or recognize dozens of words. Its strength is in doing just a few things very well—accurately detecting a handful of predefined keywords with minimal hardware. This simplicity makes it ideal for embedded systems where there’s no room for large models or complex software stacks.
